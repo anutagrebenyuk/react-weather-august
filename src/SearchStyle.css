@@ -8,7 +8,7 @@
   font-size: 14px;
 }
 
-#checkWeather:hover {
+.checkWeather:hover {
   background: #565da0;
   color: #fff;
 }
