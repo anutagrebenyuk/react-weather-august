@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Search from "./Search";
 import Weather from "./Weather";
 
