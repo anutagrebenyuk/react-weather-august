@@ -4,7 +4,7 @@ body {
 }
 
 h3 {
-  font-size: 16px;
+  font-size: 14px;
 }
 ul {
   list-style: none;
@@ -20,7 +20,7 @@ footer {
 a {
   text-decoration: none;
 }
-.container {
+.App .container {
   background: linear-gradient(to top, #a8edea9e 0%, #f8bde347 100%);
   margin: 50px auto;
   border-radius: 10px;
@@ -28,23 +28,50 @@ a {
   max-width: 70%;
 }
 
-#city {
+.checkWeather {
+  background: #dbdffd;
+  transition: all 200ms ease-in-out;
+  border: 1px solid #646fd4;
+  border-radius: 8px;
+  padding: 7px 23px;
+  color: #646fd4;
+  font-size: 14px;
+}
+
+.checkWeather:hover {
+  background: #565da0;
+  color: #fff;
+}
+.btn-location {
+  background: #565da0;
+  transition: all 200ms ease-in-out;
+  color: #fff;
+  border: 1px solid #646fd4;
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 7px 10px;
+}
+.btn-location:hover {
+  background: #dbdffd;
+  color: #646fd4;
+}
+
+.city {
   font-size: 50px;
+  color: #4f58a8;
+  font-weight: bold;
 }
 #search-form {
   margin: 15px 0 30px 0;
 }
-#icon {
-  border: 2px solid #454f974c;
-  border-radius: 10px;
-}
-#main-info {
+
+.main-info {
   position: relative;
-  top: 15px;
+
   right: 40px;
   text-align: right;
 }
-#description {
+.description {
   text-transform: capitalize;
 }
 #forecast-container {
@@ -87,7 +114,7 @@ ul.details {
   opacity: 0.7;
 }
 
-#temperature {
+.temperature {
   position: relative;
   top: 0px;
   font-family: monospace;
@@ -96,4 +123,16 @@ ul.details {
   text-align: center;
   margin: 0 auto;
   padding: 0;
+  color: #4f58a8;
+}
+.FormattedDate .date {
+  font-size: 20px;
+  color: grey;
+  line-height: 0.6;
+}
+
+.WeatherIcon {
+  margin: 10px auto;
+  display: flex;
+  text-align: center;
 }

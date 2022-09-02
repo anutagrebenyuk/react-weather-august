@@ -1,52 +1,80 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
+import axios from "axios";
+import WeatherInfo from "./WeatherInfo";
 
 export default function Weather() {
-  return (
-    <div className="Weather">
-      <div className="row">
-        <div className="col-2">
-          <img src="/" alt="" id="icon" className="float-left" />
-        </div>
+  let [weatherData, setWeatherData] = useState({ ready: false });
+  const [city, setCity] = useState("Paris");
 
-        <div className="col-3">
-          <span id="temperature">19</span>
-          <span className="units">
-            <a href="/" id="celsius-link" className="active">
-              °C
-            </a>
-            |
-            <a href="/" id="fahrenheit-link">
-              °F
-            </a>
-          </span>
-        </div>
+  function handleResponse(response) {
+    setWeatherData({
+      ready: true,
+      temperature: response.data.main.temp,
+      city: response.data.name,
+      wind: response.data.wind.speed,
+      humidity: response.data.main.humidity,
+      feelsLike: response.data.main.feels_like,
+      icon: response.data.weather[0].icon,
+      description: response.data.weather[0].description,
+      date: new Date(response.data.dt * 1000),
+    });
+  }
 
-        <div className="col-3">
-          <ul className="details">
-            <li>
-              Real feel: <span id="feels-like"></span> 25°
-            </li>
-            <li>
-              <i className="fa-solid fa-umbrella"></i> Humidity: 80
-              <span id="humidity"></span>%
-            </li>
-            <li>
-              <i className="fa-solid fa-wind"></i> Wind: 30
-              <span id="wind"></span> km/h
-            </li>
-            <li>
-              <i className="fa-solid fa-rainbow"></i>
-              <span id="description"> Clouds</span>
-            </li>
-          </ul>
-        </div>
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
 
-        <div className="col-4" id="main-info">
-          <h2 id="city">Kyiv</h2>
-          <h3 id="curr-date">Monday, 27 June 2022</h3>
-        </div>
+  function handleCityChange(event) {
+    setCity(event.target.value);
+  }
+
+  function search() {
+    let apiKey = "7017d65a526be0558677d25fee70c883";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+  }
+
+  if (weatherData.ready) {
+    return (
+      <div className="Weather">
+        <form
+          onSubmit={handleSubmit}
+          className="search-form Search"
+          id="search-form"
+        >
+          <div className="row">
+            <div className="col-6">
+              <div className="input-group mb-3" id="enterCityForm">
+                <input
+                  type="search"
+                  className="form-control"
+                  placeholder="Enter the city"
+                  autoFocus="on"
+                  autoComplete="off"
+                  id="cityEntered"
+                  onChange={handleCityChange}
+                />
+              </div>
+            </div>
+            <div className="col-auto">
+              <input
+                className="checkWeather"
+                type="submit"
+                value="Check weather"
+              />
+            </div>
+            <div className="col-auto">
+              <button className="btn-location">Current location</button>
+            </div>
+          </div>
+        </form>
+        <WeatherInfo data={weatherData} />
       </div>
-    </div>
-  );
+    );
+  } else {
+    search();
+    return "Loading...";
+  }
 }
