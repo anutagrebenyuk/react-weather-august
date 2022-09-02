@@ -20,8 +20,10 @@ export default function WeatherInfo(props) {
         <div className="col-3">
           <ul className="details">
             <li>
-              Real feel: <span className="feels-like"></span>{" "}
-              {Math.round(props.data.feelsLike)}°C
+              Real feel:{" "}
+              <span className="feels-like">
+                {Math.round(props.data.feelsLike)}°C
+              </span>{" "}
             </li>
             <li>
               <i className="fa-solid fa-umbrella"></i> Humidity:{" "}
