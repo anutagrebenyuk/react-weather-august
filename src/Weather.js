@@ -9,7 +9,6 @@ export default function Weather() {
   const [city, setCity] = useState("Paris");
 
   function handleResponse(response) {
-    console.log(response.data);
     setWeatherData({
       coordinates: response.data.coord,
       ready: true,
