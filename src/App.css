@@ -131,7 +131,7 @@ ul.details {
   line-height: 0.6;
 }
 
-.WeatherIcon {
+.WeatherInfo .WeatherIcon {
   margin: 10px auto;
   display: flex;
   text-align: center;
